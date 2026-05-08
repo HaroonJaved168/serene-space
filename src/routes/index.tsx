@@ -1,26 +1,46 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Navbar } from "@/components/site/Navbar";
+import { Hero } from "@/components/site/Hero";
+import { About } from "@/components/site/About";
+import { Services } from "@/components/site/Services";
+import { WhyUs } from "@/components/site/WhyUs";
+import { OfferBanner } from "@/components/site/OfferBanner";
+import { Contact } from "@/components/site/Contact";
+import { Footer } from "@/components/site/Footer";
+import { useReveal } from "@/hooks/use-reveal";
 
 export const Route = createFileRoute("/")({
   component: Index,
+  head: () => ({
+    meta: [
+      { title: "Mental Health Well-Being Clinic — Talk, Heal & Grow" },
+      {
+        name: "description",
+        content:
+          "A safe, confidential and non-judgmental mental health clinic offering counseling, therapy and personal growth support. Now open — book your first session.",
+      },
+      { property: "og:title", content: "Mental Health Well-Being Clinic" },
+      {
+        property: "og:description",
+        content:
+          "A safe, confidential space to talk, heal and grow. Counseling for anxiety, depression, stress, trauma and more.",
+      },
+    ],
+  }),
 });
 
-// IMPORTANT: Replace this placeholder. For sites with multiple pages (About, Services, Contact, etc.),
-// create separate route files (about.tsx, services.tsx, contact.tsx) — don't put all pages in this file.
-function PlaceholderIndex() {
-  return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
-  );
-}
-
 function Index() {
-  return <PlaceholderIndex />;
+  useReveal();
+  return (
+    <main className="min-h-screen bg-background">
+      <Navbar />
+      <Hero />
+      <About />
+      <Services />
+      <WhyUs />
+      <OfferBanner />
+      <Contact />
+      <Footer />
+    </main>
+  );
 }
