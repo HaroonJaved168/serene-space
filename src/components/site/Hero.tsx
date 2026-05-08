@@ -28,7 +28,7 @@ export function Hero() {
 
           <p className="mt-6 text-lg text-foreground/75 max-w-xl leading-relaxed">
             A safe, confidential and non-judgmental space where you can openly share
-            your feelings — and rediscover balance, calm, and clarity.
+            your feelings and rediscover balance, calm, and clarity.
           </p>
 
           <div className="mt-9 flex flex-wrap items-center gap-4">

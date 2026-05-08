@@ -20,7 +20,7 @@ export function WhyUs() {
           </h2>
           <p className="mt-5 text-foreground/75 leading-relaxed">
             We bring warmth, expertise, and complete discretion to every session
-            — so you can focus on what matters most: you.
+            so you can focus on what matters most: you.
           </p>
         </div>
 
