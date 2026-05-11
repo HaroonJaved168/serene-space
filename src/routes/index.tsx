@@ -8,6 +8,8 @@ import { OfferBanner } from "@/components/site/OfferBanner";
 import { Contact } from "@/components/site/Contact";
 import { Footer } from "@/components/site/Footer";
 import { useReveal } from "@/hooks/use-reveal";
+import { useState } from "react";
+import { AppointmentModal } from "@/components/site/AppointmentModal";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -31,16 +33,23 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   useReveal();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <main className="min-h-screen bg-background">
-      <Navbar />
-      <Hero />
+      <Navbar onBookClick={() => setIsModalOpen(true)} />
+      <Hero onBookClick={() => setIsModalOpen(true)} />
       <About />
       <Services />
       <WhyUs />
       <OfferBanner />
-      <Contact />
+      <Contact onBookClick={() => setIsModalOpen(true)} />
       <Footer />
+      
+      <AppointmentModal 
+        open={isModalOpen} 
+        onClose={() => setIsModalOpen(false)} 
+      />
     </main>
   );
 }

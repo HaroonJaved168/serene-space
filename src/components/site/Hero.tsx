@@ -2,7 +2,7 @@ import botanical from "@/assets/botanical-hero.jpg";
 import room from "@/assets/therapy-room.jpg";
 import { Calendar, Sparkles } from "lucide-react";
 
-export function Hero() {
+export function Hero({ onBookClick }: { onBookClick: () => void }) {
   return (
     <section id="home" className="relative pt-28 lg:pt-32 pb-20 overflow-hidden">
       <img
@@ -32,13 +32,13 @@ export function Hero() {
           </p>
 
           <div className="mt-9 flex flex-wrap items-center gap-4">
-            <a
-              href="#contact"
+            <button
+              onClick={onBookClick}
               className="group inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-7 py-3.5 font-medium shadow-soft hover:bg-gold hover:text-primary transition-all hover:-translate-y-0.5"
             >
               <Calendar className="h-4 w-4" />
               Book a Session
-            </a>
+            </button>
             <a
               href="#about"
               className="inline-flex items-center rounded-full border border-primary/20 px-7 py-3.5 font-medium text-primary hover:bg-card transition-colors"

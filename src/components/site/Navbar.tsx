@@ -9,7 +9,7 @@ const links = [
   { href: "#contact", label: "Contact" },
 ];
 
-export function Navbar() {
+export function Navbar({ onBookClick }: { onBookClick: () => void }) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -53,12 +53,12 @@ export function Navbar() {
             </li>
           ))}
           <li>
-            <a
-              href="#contact"
+            <button
+              onClick={onBookClick}
               className="inline-flex items-center rounded-full bg-primary text-primary-foreground px-5 py-2.5 text-sm font-medium hover:bg-gold hover:text-primary transition-colors"
             >
               Book a Session
-            </a>
+            </button>
           </li>
         </ul>
 
@@ -86,13 +86,15 @@ export function Navbar() {
               </li>
             ))}
             <li>
-              <a
-                onClick={() => setOpen(false)}
-                href="#contact"
-                className="block text-center rounded-full bg-primary text-primary-foreground py-2.5"
+              <button
+                onClick={() => {
+                  setOpen(false);
+                  onBookClick();
+                }}
+                className="w-full text-center rounded-full bg-primary text-primary-foreground py-2.5"
               >
                 Book a Session
-              </a>
+              </button>
             </li>
           </ul>
         </div>
