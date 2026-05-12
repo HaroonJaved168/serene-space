@@ -1,4 +1,5 @@
 import { MapPin, Phone, CalendarDays, Lock } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 
 const items = [
   {
@@ -15,7 +16,7 @@ const items = [
   },
 ];
 
-export function Contact({ onBookClick }: { onBookClick: () => void }) {
+export function Contact() {
   return (
     <section id="contact" className="py-24">
       <div className="max-w-5xl mx-auto px-6 lg:px-10">
@@ -54,13 +55,13 @@ export function Contact({ onBookClick }: { onBookClick: () => void }) {
           </div>
 
           <div className="mt-10 text-center">
-            <button
-              onClick={onBookClick}
+            <Link
+              to="/book-appointment"
               className="inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-8 py-4 font-medium shadow-soft hover:bg-gold hover:text-primary transition-all hover:-translate-y-0.5"
             >
               <CalendarDays className="h-4 w-4" />
               Book Appointment
-            </button>
+            </Link>
           </div>
         </div>
       </div>

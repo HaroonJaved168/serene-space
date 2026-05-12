@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Leaf, Menu, X } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 
 const links = [
   { href: "#home", label: "Home" },
@@ -9,7 +10,7 @@ const links = [
   { href: "#contact", label: "Contact" },
 ];
 
-export function Navbar({ onBookClick, isModalOpen }: { onBookClick: () => void; isModalOpen: boolean }) {
+export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -23,13 +24,13 @@ export function Navbar({ onBookClick, isModalOpen }: { onBookClick: () => void; 
   return (
     <header
       className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${
-        scrolled && !isModalOpen
+        scrolled
           ? "bg-background/85 backdrop-blur-md shadow-soft"
-          : isModalOpen ? "bg-background/95 shadow-none" : "bg-transparent"
+          : "bg-transparent"
       }`}
     >
       <nav className="max-w-7xl mx-auto px-6 lg:px-10 h-20 flex items-center justify-between">
-        <a href="#home" className="flex items-center gap-2.5 group">
+        <Link to="/" className="flex items-center gap-2.5 group">
           <span className="h-10 w-10 rounded-full bg-primary text-primary-foreground grid place-items-center shadow-soft group-hover:scale-105 transition-transform">
             <Leaf className="h-5 w-5" />
           </span>
@@ -39,7 +40,7 @@ export function Navbar({ onBookClick, isModalOpen }: { onBookClick: () => void; 
               Well-Being Clinic
             </span>
           </span>
-        </a>
+        </Link>
 
         <ul className="hidden md:flex items-center gap-9">
           {links.map((l) => (
@@ -53,12 +54,12 @@ export function Navbar({ onBookClick, isModalOpen }: { onBookClick: () => void; 
             </li>
           ))}
           <li>
-            <button
-              onClick={onBookClick}
+            <Link
+              to="/book-appointment"
               className="inline-flex items-center rounded-full bg-primary text-primary-foreground px-5 py-2.5 text-sm font-medium hover:bg-gold hover:text-primary transition-colors"
             >
               Book a Session
-            </button>
+            </Link>
           </li>
         </ul>
 
@@ -86,15 +87,13 @@ export function Navbar({ onBookClick, isModalOpen }: { onBookClick: () => void; 
               </li>
             ))}
             <li>
-              <button
-                onClick={() => {
-                  setOpen(false);
-                  onBookClick();
-                }}
-                className="w-full text-center rounded-full bg-primary text-primary-foreground py-2.5"
+              <Link
+                to="/book-appointment"
+                onClick={() => setOpen(false)}
+                className="block w-full text-center rounded-full bg-primary text-primary-foreground py-2.5"
               >
                 Book a Session
-              </button>
+              </Link>
             </li>
           </ul>
         </div>

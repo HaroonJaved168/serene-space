@@ -1,8 +1,9 @@
 import botanical from "@/assets/botanical-hero.jpg";
 import room from "@/assets/therapy-room.jpg";
 import { Calendar, Sparkles } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 
-export function Hero({ onBookClick, isModalOpen }: { onBookClick: () => void; isModalOpen: boolean }) {
+export function Hero() {
   return (
     <section id="home" className="relative pt-28 lg:pt-32 pb-20 overflow-hidden">
       <img
@@ -32,13 +33,13 @@ export function Hero({ onBookClick, isModalOpen }: { onBookClick: () => void; is
           </p>
 
           <div className="mt-9 flex flex-wrap items-center gap-4">
-            <button
-              onClick={onBookClick}
+            <Link
+              to="/book-appointment"
               className="group inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-7 py-3.5 font-medium shadow-soft hover:bg-gold hover:text-primary transition-all hover:-translate-y-0.5"
             >
               <Calendar className="h-4 w-4" />
               Book a Session
-            </button>
+            </Link>
             <a
               href="#about"
               className="inline-flex items-center rounded-full border border-primary/20 px-7 py-3.5 font-medium text-primary hover:bg-card transition-colors"
@@ -77,7 +78,7 @@ export function Hero({ onBookClick, isModalOpen }: { onBookClick: () => void; is
               height={1024}
               className="w-full h-[520px] object-cover"
             />
-            <div className={`absolute bottom-5 left-5 right-5 ${isModalOpen ? 'bg-background' : 'bg-background/85 backdrop-blur-md'} rounded-2xl p-4 flex items-center gap-3`}>
+            <div className="absolute bottom-5 left-5 right-5 bg-background/85 backdrop-blur-md rounded-2xl p-4 flex items-center gap-3">
               <span className="h-10 w-10 rounded-full bg-primary text-primary-foreground grid place-items-center font-script text-xl">
                 ♥
               </span>
