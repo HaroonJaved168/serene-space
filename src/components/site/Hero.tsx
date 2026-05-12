@@ -2,7 +2,7 @@ import botanical from "@/assets/botanical-hero.jpg";
 import room from "@/assets/therapy-room.jpg";
 import { Calendar, Sparkles } from "lucide-react";
 
-export function Hero({ onBookClick }: { onBookClick: () => void }) {
+export function Hero({ onBookClick, isModalOpen }: { onBookClick: () => void; isModalOpen: boolean }) {
   return (
     <section id="home" className="relative pt-28 lg:pt-32 pb-20 overflow-hidden">
       <img
@@ -77,7 +77,7 @@ export function Hero({ onBookClick }: { onBookClick: () => void }) {
               height={1024}
               className="w-full h-[520px] object-cover"
             />
-            <div className="absolute bottom-5 left-5 right-5 bg-background/85 backdrop-blur-md rounded-2xl p-4 flex items-center gap-3">
+            <div className={`absolute bottom-5 left-5 right-5 ${isModalOpen ? 'bg-background' : 'bg-background/85 backdrop-blur-md'} rounded-2xl p-4 flex items-center gap-3`}>
               <span className="h-10 w-10 rounded-full bg-primary text-primary-foreground grid place-items-center font-script text-xl">
                 ♥
               </span>

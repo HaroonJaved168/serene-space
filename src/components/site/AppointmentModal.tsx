@@ -30,13 +30,16 @@ export function AppointmentModal({ open, onClose }: Props) {
   const [sent, setSent] = useState(false);
   const overlayRef = useRef<HTMLDivElement>(null);
 
+  const onCloseRef = useRef(onClose);
+  useEffect(() => { onCloseRef.current = onClose; }, [onClose]);
+
   // Close on Escape key
   useEffect(() => {
     if (!open) return;
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && onCloseRef.current();
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [open, onClose]);
+  }, [open]);
 
   // IMPORTANT: No document.body.style.overflow = "hidden" here - Rule 1
 
@@ -68,10 +71,9 @@ export function AppointmentModal({ open, onClose }: Props) {
 
     setSent(true);
 
-    // Rule 3: No API calls, just open WhatsApp link
     setTimeout(() => {
       window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`, "_blank");
-    }, 1200);
+    }, 800); // Reduced from 1200ms for better responsiveness
   };
 
   if (!open) return null;
@@ -151,6 +153,7 @@ export function AppointmentModal({ open, onClose }: Props) {
                       required
                       min={new Date().toISOString().split("T")[0]}
                       className="appointment-input"
+                      onFocus={(e) => e.target.showPicker?.()}
                     />
                   </div>
                 </div>
@@ -189,13 +192,15 @@ export function AppointmentModal({ open, onClose }: Props) {
           position: fixed;
           inset: 0;
           z-index: 9999;
-          background: rgba(250, 247, 242, 0.85);
-          backdrop-filter: blur(16px);
+          background: rgba(250, 247, 242, 0.92); /* Increased opacity */
+          backdrop-filter: blur(8px); /* Reduced from 16px for production performance */
+          -webkit-backdrop-filter: blur(8px);
           display: flex;
           align-items: center;
           justify-content: center;
           padding: 1rem;
-          overflow-y: auto; /* Rule 5: Overlay scrolls */
+          overflow-y: auto;
+          overscroll-behavior: contain; /* Prevents scroll chaining */
         }
 
         .appointment-card {
@@ -207,13 +212,13 @@ export function AppointmentModal({ open, onClose }: Props) {
           max-width: 480px;
           position: relative;
           box-shadow: 0 10px 40px -10px rgba(27, 67, 50, 0.15);
-          animation: modalScale 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-          margin-top: auto;
-          margin-bottom: auto;
+          animation: modalScale 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+          margin: auto; /* Centering */
+          will-change: transform, opacity; /* Layer promotion */
         }
 
         @keyframes modalScale {
-          from { opacity: 0; transform: scale(0.9) translateY(20px); }
+          from { opacity: 0; transform: scale(0.95) translateY(10px); }
           to { opacity: 1; transform: scale(1) translateY(0); }
         }
 

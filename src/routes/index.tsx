@@ -37,8 +37,8 @@ function Index() {
 
   return (
     <main className="min-h-screen bg-background">
-      <Navbar onBookClick={() => setIsModalOpen(true)} />
-      <Hero onBookClick={() => setIsModalOpen(true)} />
+      <Navbar onBookClick={() => setIsModalOpen(true)} isModalOpen={isModalOpen} />
+      <Hero onBookClick={() => setIsModalOpen(true)} isModalOpen={isModalOpen} />
       <About />
       <Services />
       <WhyUs />

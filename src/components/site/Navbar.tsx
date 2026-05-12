@@ -9,7 +9,7 @@ const links = [
   { href: "#contact", label: "Contact" },
 ];
 
-export function Navbar({ onBookClick }: { onBookClick: () => void }) {
+export function Navbar({ onBookClick, isModalOpen }: { onBookClick: () => void; isModalOpen: boolean }) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -23,9 +23,9 @@ export function Navbar({ onBookClick }: { onBookClick: () => void }) {
   return (
     <header
       className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${
-        scrolled
+        scrolled && !isModalOpen
           ? "bg-background/85 backdrop-blur-md shadow-soft"
-          : "bg-transparent"
+          : isModalOpen ? "bg-background/95 shadow-none" : "bg-transparent"
       }`}
     >
       <nav className="max-w-7xl mx-auto px-6 lg:px-10 h-20 flex items-center justify-between">
